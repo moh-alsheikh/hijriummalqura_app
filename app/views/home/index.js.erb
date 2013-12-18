@@ -1,0 +1,7 @@
+<% if @add_result %>
+    $('#hijri-adding-result').html('');   
+    $('<%= j render("adding_result") %>').appendTo('#hijri-adding-result');
+<% elsif @convert_result %>
+    $('#hijri-convert-result').html('');   
+    $('<%= j render("convert_result") %>').appendTo('#hijri-convert-result');
+<%end%>

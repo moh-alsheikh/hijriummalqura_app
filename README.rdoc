@@ -1,0 +1,1 @@
+== Rails app to demonstrate how to work with hijri ummalqura gem.

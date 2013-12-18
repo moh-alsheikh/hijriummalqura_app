@@ -1,0 +1,94 @@
+<div class="container">
+
+  <div class="row">
+    <div class="span8 pull-right">
+      <legend><div class="alert alert-success"><h2>التاريخ الهجري بتقويم أم القرى</h2></div></legend>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span3 pull-right">
+      <p><span class="label label-info">تاريخ اليوم ميلادي </span>
+        &nbsp;&nbsp;&nbsp;<b><%= HijriUmmAlqura.format_date([Date.today.year,Date.today.month,Date.today.day]) %> </b>
+      </p>
+    </div> 
+  
+    <div class="span3 pull-right">
+      <p><span class="label label-info">تاريخ اليوم هجري </span>
+        &nbsp;&nbsp;&nbsp;<b><%= HijriUmmAlqura.gd_to_hd(Date.today.year,Date.today.month,Date.today.day) %> </b>
+      </p>
+    </div>      
+  
+    <div class="span3 pull-right">
+      <p><span class="label label-info">عدد أيام الشهر</span>
+        &nbsp;&nbsp;&nbsp;<b><%= hijri_date.days_in_month%> </b>
+      </p>
+    </div>      
+  </div>    
+
+  <br><br>
+
+  <ul id="myTab" class="nav nav-tabs">
+    <li class=""><a href="#hijri_convert" data-toggle="tab">تحويل التاريخ</a></li>
+    <li class=""><a href="#hijri_add" data-toggle="tab">إضافة </a></li>
+  </ul>
+  
+  <div id="myTabContent" class="tab-content">
+    
+    <div class="tab-pane active" id="hijri_convert">
+    
+      <div class="row">
+        <div class="span8 pull-right">
+          <legend><div class="alert alert-success"><h4>التحويل بين التاريخ الهجري والميلادي</h4></div></legend>
+        </div>
+      </div>
+      
+      <div class="row">
+        
+        <div class="span4 pull-right">
+          <%= form_tag root_path ,:method => 'get' , :remote=> true do %>
+          <%= label_tag "التاريخ" %>
+          <%= text_field_tag :c_date, params[:hijri_date], :class=> "text-center", :placeholder=> "yyyy-mm-dd",  :required=> true %>
+          <%= label_tag "التحويل من؟" %>
+          <%= select_tag :convert_what , "<option value='1'>ميلادي إلى هجري</option><option value='2'>هجري إلى ميلادي</option>".html_safe, :class=> "text-center"%><br>                    
+          <%= submit_tag "حول", :class=> "btn btn-large"%>
+          <%end%>
+        </div>
+        
+        <div class="span4 pull-right">
+          <div id="hijri-convert-result"></div>
+        </div>  
+        
+        </div>
+    </div>  
+
+    <div class="tab-pane" id="hijri_add">
+
+      <div class="row">
+        <div class="span8 pull-right">
+          <legend><div class="alert alert-info"><h4>إضافة يوم - أسبوع - شهر - سنة</h4></div></legend>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span4 pull-right">
+          <%= form_tag root_path ,:method => 'get' , :remote=> true do %>
+          <%= label_tag "التاريخ الهجري" %>
+          <%= text_field_tag :starting_date, params[:starting_date], :class=> "text-center" , :required=> true %>
+          <br>
+          <%= label_tag "إضافة عدد " %> <%= number_field_tag :add_no, params[:add_no] , :class=> "text-center", :required=> true%>
+          <%= select_tag :add_what , "<option value='1'>يوم</option><option value='2'>أسبوع</option><option value='3'>شهر</option><option value='4'>سنة</option>".html_safe, :class=> "text-center"%>
+          <br>
+          <%= submit_tag "بحث", :class=> "btn btn-large"%>
+          <%end%>
+        </div> 
+  
+        <div class="span4 pull-right">
+          <div id="hijri-adding-result"></div>
+        </div>  
+        
+      </div>
+    </div> 
+
+  </div> 
+</div>
